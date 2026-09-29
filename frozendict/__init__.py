@@ -1,4 +1,8 @@
-import collections
+try:
+    from collections.abc import Mapping
+except ImportError:  # python < 3.3
+    from collections import Mapping
+
 import operator
 import functools
 import sys
@@ -13,7 +17,7 @@ except ImportError:  # python < 2.7
 iteritems = getattr(dict, 'iteritems', dict.items) # py2-3 compatibility
 
 
-class frozendict(collections.Mapping):
+class frozendict(Mapping):
     """
     An immutable wrapper around dictionaries that implements the complete :py:class:`collections.Mapping`
     interface. It can be used as a drop-in replacement for dictionaries where immutability is desired.
